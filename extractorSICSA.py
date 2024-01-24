@@ -1,5 +1,5 @@
 import fitz
-
+from datetime import datetime
 
 def extraer_oficio_y_asunto_primera_pagina(ruta_pdf):
     try:
@@ -16,9 +16,11 @@ def extraer_oficio_y_asunto_primera_pagina(ruta_pdf):
         fecha = parrafos[indice_fecha].replace("Monterrey, N.L., a", "") if indice_fecha is not None else None
 
         fecha_objeto = fecha.split(' ');
+        fecha_lista_filtrada = [elemento for elemento in fecha_objeto if elemento and elemento.lower() != "de"]
 
         asunto_lines = parrafos[indice_asunto + 0:] if indice_asunto is not None else []
-        asunto = " ".join(asunto_lines[:4]) if len(asunto_lines) > 1 else None
+        asunto = " ".join(asunto_lines[:4]) if len(asunto_lines) > 4 else None
+
 
         documento_pdf.close()
 
@@ -26,7 +28,8 @@ def extraer_oficio_y_asunto_primera_pagina(ruta_pdf):
             "NUMCODE": 0,
             "STRMESSAGE": "Exito",
             "RESPONSE": [
-                {"Oficio": oficio, "Fecha": {"dia": fecha_objeto[1], "mes": fecha_objeto[3], "anio": fecha_objeto[5]},
+                {"Oficio": oficio,
+                 "Fecha": {"dia": fecha_lista_filtrada[0], "mes": fecha_lista_filtrada[1], "anio": fecha_lista_filtrada[2]},
                  "Asunto": asunto.replace("Asunto:", "")}
             ],
             "SUCCESS": True
