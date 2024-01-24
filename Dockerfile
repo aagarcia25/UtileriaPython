@@ -10,7 +10,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Expone el puerto 93 para el tráfico web
-EXPOSE 93
+EXPOSE 99
 
 CMD ["python", "app.py"]
 

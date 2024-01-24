@@ -25,4 +25,4 @@ def extraer_informacion():
         return jsonify({"error": f"Error en el servidor: {e}"}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=93)
+    app.run(debug=True, host='0.0.0.0', port=99)
