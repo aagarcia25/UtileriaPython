@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 import os
-from extractor import extractorSICSA
+from extractorSICSA  import extraer_oficio_y_asunto_primera_pagina
 
 app = Flask(__name__)
 
