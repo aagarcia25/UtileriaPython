@@ -1,9 +1,10 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS  # Importa la extensión CORS
 import os
 from extractorSICSA  import extraer_oficio_y_asunto_primera_pagina
 
 app = Flask(__name__)
-
+CORS(app)  # Configura CORS para la aplicación Flask
 @app.route('/ETL/extraer-informacion', methods=['POST'])
 def extraer_informacion():
     try:
